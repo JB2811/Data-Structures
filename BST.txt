@@ -1,11 +1,14 @@
 #include<iostream>
 using namespace std;
+
 struct node
 { int data;
   node *l,*r;};
+
 class BST
 { public:
   node *root,*temp;
+  
   BST()
   { root=new node;
     root=NULL;
@@ -38,6 +41,7 @@ class BST
         case 7: cout<<"Exited";
                 break;}}
       while(c<7);}
+  
   void insert()
   { temp=new node;
     cout<<"\nEnter the data of the node: ";
@@ -51,6 +55,7 @@ class BST
      { insertx(temp,root->l);}
      else
      { insertx(temp,root->r);}}}
+  
   void insertx(node *t,node* &ri)
   { if(t==NULL)
     { return;}
@@ -63,6 +68,7 @@ class BST
       { insertx(t,ri->l);}
       else
       { insertx(t,ri->r);}}}
+  
   void deleten(int x,node* temp)
   { temp=root;
     node* pre;
@@ -101,12 +107,14 @@ class BST
         else
         { pre->l=NULL;}
         balancing(temp);}}}
+  
   void balancing(node* temp)
   {if(temp!=NULL)
    {insertx(temp->l,root);
     balancing(temp->l);
     insertx(temp->r,root);
     balancing(temp->r);}}
+  
   node* search(int x, node* &n)
   { if(n==NULL)
     { return n;}
@@ -116,21 +124,25 @@ class BST
     { search(x,n->r);}
     else if(x==n->data)
     { return n;}}
+  
   void inorder( node *n)
   { if(n!=NULL)
     { inorder(n->l);
       cout<<n->data<<"-";
       inorder(n->r);}}
+  
   void postorder(node *n)
   { if(n!=NULL)
     { postorder(n->l);
       postorder(n->r);
       cout<<n->data<<"-";}}
+  
   void preorder(node *n)
   { if(n!=NULL)
     { cout<<n->data<<"-";
       preorder(n->l);
       preorder(n->r);}}};
+
 int main()
 { BST b;
   return 0;}
