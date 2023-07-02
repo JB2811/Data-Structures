@@ -1,0 +1,75 @@
+#include<iostream>
+using namespace std;
+class graph
+{public:
+  int s[10],q[10],adj[10][10],ins[10],inq[10],n,i,j;
+
+  graph()
+  { cout<<"\nEnter the no' of elements: ";
+    cin>>n;
+    cout<<"\nEnter Adjacent Matrix elements as 2D matrix:- \n";
+    for(i=0;i<n;i++)
+    { for(j=0;j<n;j++)
+      {cin>>adj[i][j];}}
+    cout<<"\nAdjacent matrix elements:-  ";
+    for(i=0;i<n;i++)
+    { cout<<"\n";
+      for(j=0;j<n;j++)
+      {cout<<adj[i][j];}}
+    for(i=0;i<n;i++)
+    { s[i]=0;
+      q[i]=0;
+      inq[i]=0;
+      ins[i]=0;
+      v[i]=0;}}
+  void BFT()
+  { int k=0;
+    cout<<"\nBFT: ";
+    for(i=0;i<n;i++)
+    {   j=0;
+        if(inq[i]==0)
+        { q[k]=i;
+          k++;
+          inq[i]=1;}
+        while(j<n)
+        { if(adj[i][j]==1 && inq[j]!=1)
+          { q[k]=j;
+            k++;
+            inq[j]=1;}
+          j++;}}
+    for(i=0;i<k;i++)
+    {cout<<q[i]<<"-";}}
+  void DFT()
+  { int top=-1;
+    cout<<"\nDFT: ";
+    for(i=0;i<n;i++)
+    {   top++;
+        j=0;
+        if(i==0)
+        { cout<<i<<"-";
+          ins[i]=1;}
+        while(j<n)
+        { if(adj[i][j]==1 && ins[j]!=1)
+          { s[top]=j;
+            top++;
+            ins[j]=1;}
+           j++;}
+          top--;
+          while(top>=0)
+          { cout<<s[top]<<"-";
+            int x=s[top];
+            j=0;
+            while(j<n)
+            {if(adj[x][j]==1 && ins[j]!=1)
+             { s[top]=j;
+               ins[j]=1;
+               top++;}
+             j++;}
+            top--;}}}};
+int main()
+{ graph g;
+  g.BFT();
+  g.DFT();
+  return 0;}
+
+

@@ -1,0 +1,137 @@
+#include<iostream>
+using namespace std;
+struct node
+{ int data;
+  node* link;};
+struct header
+{ int count;
+  node* front;
+  node* rear;};
+class queueSLL
+{ header *queue;
+  node *pred,*pnew,*temp2,*ploc,*temp;
+  public:
+  queueSLL()
+  { queue=new header;
+    queue->count=0;
+    queue->front=NULL;
+    queue->rear=NULL;}
+  void enqueue()
+  { temp=new node;
+    if(temp==NULL)
+    { cout<<"\nMemory full";}
+    else if(queue->count==0)
+    { cout<<"\nEnter data: ";
+      cin>>temp->data;
+      queue->front=temp;
+      temp->link=NULL;
+      queue->count++;
+      queue->rear=temp;}
+    else
+    { cout<<"\nEnter data: ";
+      cin>>temp->data;
+      if(temp->data>queue->rear->data)
+      { queue->rear->link=temp;
+        queue->rear=temp;
+        temp->link=NULL;
+        queue->count++;}
+      else if(temp->data<queue->front->data)
+      { temp->link=queue->front;
+        queue->front=temp;
+        queue->count++;}
+      else
+      { ploc=new node;
+        pred=new node;
+        ploc=queue->front;
+        while(ploc!=NULL)
+        { if(ploc->data>temp->data)
+          {break;}
+          pred=ploc;
+          ploc=ploc->link;}
+        temp->link=ploc;
+        pred->link=temp;}}}
+  void display()
+  { temp=queue->front;
+    if(queue->count==0)
+    {cout<<"\nList is empty";}
+    else{
+    if(queue->count>1)
+      { cout<<"\nQueue SLL: ";
+        while(temp->link!=NULL)
+        { cout<<temp->data;
+          cout<<"->";
+          temp=temp->link;}
+        cout<<temp->data;}
+      else
+      { cout<<"\nQueue SLL: ";
+        cout<<temp->data;}}}
+  void dequeue()
+  { temp=queue->front;
+    if(queue->count==0)
+    { cout<<"\nList is empty";}
+     else if(queue->count==1)
+     { delete temp;
+       queue->front=NULL;
+       queue->rear=NULL;
+       queue->count--;
+       cout<<"\nElement deleted";}
+     else
+     { queue->front=temp->link;
+       delete temp;
+       queue->count--;
+       if(queue->count==1)
+       { queue->rear=queue->front;}
+       cout<<"\nElement deleted";}}
+void empty()
+{ if(queue->front==NULL)
+  { cout<<"\Queue is empty";}
+  else
+  { cout<<"\nQueue is not empty";}}
+void isfull()
+{ pnew=new node;
+  if(pnew==NULL)
+  {cout<<"\nQueue if full";}
+  else
+  {cout<<"\nQueue is not full";}}
+void queuecount()
+{ cout<<"\nqueue count= "<<queue->count;}
+void queuefront()
+{ if(queue->count==0)
+  { cout<<"\nEmpty queue";}
+  else
+  { cout<<"\nQueue front= "<<queue->front->data;}}
+void queuerear()
+{ if(queue->count==0)
+  { cout<<"\nEmpty queue";}
+  else
+  { cout<<"\nQueue rear: "<<queue->rear->data;}}};
+int main()
+{ queueSLL s;
+  int n,c;
+  cout<<"\n1.enqueue 2.dequeue 3.Display Queue 4.is empty 5.is full 6. Queue count 7.Queue front 8.Queue rear 9.exit";
+  do{
+  cout<<"\nEnter choice: ";
+  cin>>c;
+  switch(c)
+  { case 1: s.enqueue();
+            break;
+    case 2: s.dequeue();
+            break;
+    case 3: s.display();
+            break;
+    case 4: s.empty();
+            break;
+    case 5: s.isfull();
+            break;
+    case 6: s.queuecount();
+            break;
+    case 7: s.queuefront();
+            break;
+    case 8: s.queuerear();
+            break;
+    case 9: break;}}
+ while(c!=9);
+ return 0;}
+
+
+

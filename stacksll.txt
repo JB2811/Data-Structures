@@ -1,0 +1,172 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+struct node
+{ int data;
+  node* link;};
+struct header
+{ int count;
+  node* first;};
+class SLL
+{ header *top;
+  node *pnew,*temp2,*pred,*temp;
+  public:
+  SLL()
+  { top=new header;
+    top->count=0;
+    top->first=NULL;}
+  void push()
+  { pnew = new node;
+    if(top->count==0)
+    { cout<<"\nEnter data: ";
+      cin>>pnew->data;
+      top->first=pnew;
+      temp=pnew;
+      top->count++;
+      cout<<"\nElement inserted";
+      pnew->link=NULL;}
+    else if(top->count>0)
+    { cout<<"\nEnter data: ";
+      cin>>pnew->data;
+      pnew->link=temp;
+      top->first=pnew;
+      temp=pnew;
+      top->count++;
+      cout<<"\nElement inserted";}
+    else if(pnew==NULL)
+    { cout<<"\nNot possible, Memory full";}}
+  void display()
+  { temp=top->first;
+    if(top->count==0)
+    {cout<<"\nList is empty";}
+    else{
+    int l;
+    cout<<"\nWith address(1 for yes and 0 for no)?: ";
+    cin>>l;
+    if(l==1)
+    {while(temp->link!=NULL)
+     { cout<<"\nData= "<<temp->data;
+       cout<<"\nAddress= "<<temp->link;
+       temp=temp->link;}
+     cout<<"\nData= "<<temp->data;
+     cout<<"\nAddress= "<<temp->link;
+     cout<<"\n\nTop Data";
+     cout<<"\nCount= "<<top->count;
+     cout<<"\nLink= "<<top->first;}
+    else
+    { cout<<"\nStack SLL: ";
+      while(temp->link!=NULL)
+      { cout<<temp->data;
+        cout<<"->";
+        temp=temp->link;}
+      cout<<temp->data;}}}
+  void pop()
+  { if(top->count==0)
+    { cout<<"\nList is empty";}
+    else
+    { temp=new node;
+      temp=top->first;
+      top->first=temp->link;
+      delete temp;
+      cout<<"\nElement deleted";
+      top->count--;}}
+  void destroy()
+  { if(top->count==0)
+    { cout<<"\nList is empty";}
+    else
+    { temp2=new node;
+      temp=new node;
+      temp=top->first;
+     while(top->count<=0)
+     { temp2=temp;
+       temp=temp->link;
+       delete temp2;
+       top->count--;}
+     delete temp;
+     cout<<"\nList destroyed";}}
+void empty()
+{ if(top->first==NULL)
+  { cout<<"\nList is empty";}
+  else
+  { cout<<"\nList is not empty";}}
+void traversal()
+{ if(top->count==0)
+  { cout<<"\nList is empty";}
+  else{
+   int k,j=1;
+   temp=new node;
+   pred=new node;
+   cout<<"\nEnter data of the element to be searched: ";
+   cin>>k;
+   temp=top->first;
+   pred->link=top->first;
+   while(temp->link!=NULL)
+   { if(temp->data==k)
+     { cout<<"\nElement is found in the list at "<<pred->link<<"and position "<<j;}
+     pred=temp;
+     temp=temp->link;
+     j++;}
+     if(temp->link==NULL)
+     { if(temp->data==k)
+       { cout<<"\nSearch element is found in the list at "<<pred->link<<" and position "<<j;}}}}
+void isfull()
+{ pnew=new node;
+  if(pnew==NULL)
+  {cout<<"\nList if full";}
+  else
+  {cout<<"\nList is not full";}}
+void retrieve()
+{ if(top->count==0)
+  { cout<<"\nList is empty";}
+  else{
+   int kq;
+   cout<<"\nEnter the target positon to be retrieved(starts from 0): ";
+   cin>>kq;
+   if(kq>top->count)
+   {cout<<"\noverflow";}
+   else
+   { kq=kq-1;
+     temp=new node;
+     pred=new node;
+     temp=top->first;
+     pred->link=top->first;
+     while(kq>=0)
+     { pred=temp;
+       temp=temp->link;
+       kq--;}
+     cout<<"\nElement at target position is "<<temp->data<<" and address "<<pred->link;}}}
+void stackcount()
+{ cout<<"\nStack count= "<<top->count;}};
+int main()
+{ SLL s;
+  int n,c;
+  label:
+  cout<<"\n1.Push 2.Pop 3.Display Stack 4.Destroy Stack 5.is empty 6.is full 7.Traversal 8.Retrieve 9. Stack count\nEnter choice: ";
+  cin>>c;
+  switch(c)
+  { case 1: s.push();
+            break;
+    case 2: s.pop();
+            break;
+    case 3: s.display();
+            break;
+    case 4: s.destroy();
+            break;
+    case 5: s.empty();
+            break;
+    case 6: s.isfull();
+            break;
+    case 7: s.traversal();
+            break;
+    case 8: s.retrieve();
+            break;
+    case 9: s.stackcount();
+            break;}
+ cout<<"\nPress 1 to continue and 0 to exit: ";
+ cin>>n;
+ if(n!=0)
+ { goto label;}
+ return 0;}
+
+
+

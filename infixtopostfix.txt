@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+class intopo
+{ public:
+  string infix;
+  char stack[100];
+  int top,len,i,l;
+  intopo()
+  { cout<<"\nEnter the infix expression: ";
+    cin>>infix;
+    len=infix.length();
+    top=-1;
+    l=0;}
+  void conv()
+  { top++;
+    cout<<"\nPostfix: ";
+    for(i=0;i<len;i++)
+    { if(infix[i]=='(')
+      { stack[top]=infix[i];
+        top++;
+        l++;}
+      else if(infix[i]==')')
+      { top--;
+        while(stack[top]!='(')
+        { cout<<stack[top];
+          top--;}
+        stack[top]='\0';
+        l--;}
+      else if(infix[i]=='+'||infix[i]=='-'||infix[i]=='*'||infix[i]=='/')
+      { if(top==0)
+        { stack[top]=infix[i];
+          top++;}
+        else if(l>0)
+        { stack[top]=infix[i];
+          top++;}
+        else
+        { if(infix[i]=='*'||infix[i]=='/' && stack[top-1]=='+'||stack[top-1]=='-')
+          { stack[top]=infix[i];
+            top++;}
+          else if(infix[i]=='/'||infix[i]=='*' && stack[top-1]=='*'||stack[top-1]=='/')
+          { top--;
+            while(stack[top]!='+'&&stack[top]!='-'&&top>=0)
+            { cout<<stack[top];
+              top--;}
+            top++;
+            stack[top]=infix[i];
+            top++;}
+          else if(infix[i]=='+'||infix[i]=='-' && stack[top-1]=='+'||stack[top-1]=='-'||stack[top-1]=='*'||stack[top-1]=='/')
+          { top--;
+            while(top>=0)
+            { cout<<stack[top];
+              top--;}
+            top++;
+            stack[top]=infix[i];
+            top++;}}}
+      else
+      { cout<<infix[i];}}
+    top--;
+    while(top>=0)
+    { cout<<stack[top];
+      top--;}}};
+int main()
+{ intopo po;
+  po.conv();
+  return 0;}

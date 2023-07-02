@@ -1,0 +1,136 @@
+#include<iostream>
+using namespace std;
+struct node
+{ int data;
+  node *l,*r;};
+class BST
+{ public:
+  node *root,*temp;
+  BST()
+  { root=new node;
+    root=NULL;
+    int c;
+    do
+    { cout<<"\n1.Insert 2.Inorder 3. Postorder 4.Preorder 5.Search 6.Delete\nEnter choice: ";
+      cin>>c;
+      switch(c)
+      { case 1: insert();
+                break;
+        case 2: inorder(root);
+                break;
+        case 3: postorder(root);
+                break;
+        case 4: preorder(root);
+                break;
+        case 5: int x;
+                cout<<"\nEnter the data of the element to be searched: ";
+                cin>>x;
+                if(search(x,root)!=NULL)
+                {cout<<"Element found";}
+                else
+                { cout<<"\nElement is not present within the Tree";}
+                break;
+        case 6: int y;
+                cout<<"\nEnter the data of the element to be deleted: ";
+                cin>>y;
+                deleten(y,root);
+                break;
+        case 7: cout<<"Exited";
+                break;}}
+      while(c<7);}
+  void insert()
+  { temp=new node;
+    cout<<"\nEnter the data of the node: ";
+    cin>>temp->data;
+    if(root==NULL)
+    { root=temp;
+      root->l=NULL;
+      root->r=NULL;}
+    else{
+     if(temp->data<root->data)
+     { insertx(temp,root->l);}
+     else
+     { insertx(temp,root->r);}}}
+  void insertx(node *t,node* &ri)
+  { if(t==NULL)
+    { return;}
+    else if(ri==NULL)
+    { ri=t;
+      ri->l=NULL;
+      ri->r=NULL;}
+    else
+    { if(t->data<ri->data)
+      { insertx(t,ri->l);}
+      else
+      { insertx(t,ri->r);}}}
+  void deleten(int x,node* temp)
+  { temp=root;
+    node* pre;
+    pre=new node;
+    while(temp!=NULL)
+    { if(temp->data==x)
+      { break;}
+      else if(x<temp->data)
+      { pre=temp;
+        temp=temp->l;}
+      else if(x>temp->data)
+      { pre=temp;
+        temp=temp->r;}}
+    if(temp==NULL)
+    { cout<<"\nElement is not present within the Tree";}
+    else
+    { if(temp->r==NULL && temp->l==NULL)
+      { cout<<"\nElement deleted";
+        if(pre->r==temp)
+        { pre->r=NULL;}
+        else
+        { pre->l=NULL;}
+        delete temp;}
+      else
+      { if(temp==root)
+        { if(root->l!=NULL)
+          {int t=root->l->data;
+           deleten(t,root);
+           root->data=t;}
+          else
+          { int t=root->r->data;
+            deleten(t,root);
+            root->data=t;}}
+        else if(pre->r==temp)
+        { pre->r=NULL;}
+        else
+        { pre->l=NULL;}
+        balancing(temp);}}}
+  void balancing(node* temp)
+  {if(temp!=NULL)
+   {insertx(temp->l,root);
+    balancing(temp->l);
+    insertx(temp->r,root);
+    balancing(temp->r);}}
+  node* search(int x, node* &n)
+  { if(n==NULL)
+    { return n;}
+    else if(x<n->data)
+    { search(x,n->l);}
+    else if(x>n->data)
+    { search(x,n->r);}
+    else if(x==n->data)
+    { return n;}}
+  void inorder( node *n)
+  { if(n!=NULL)
+    { inorder(n->l);
+      cout<<n->data<<"-";
+      inorder(n->r);}}
+  void postorder(node *n)
+  { if(n!=NULL)
+    { postorder(n->l);
+      postorder(n->r);
+      cout<<n->data<<"-";}}
+  void preorder(node *n)
+  { if(n!=NULL)
+    { cout<<n->data<<"-";
+      preorder(n->l);
+      preorder(n->r);}}};
+int main()
+{ BST b;
+  return 0;}

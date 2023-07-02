@@ -1,0 +1,103 @@
+#include<iostream>
+using namespace std;
+struct node
+{ int data;
+  node* fore;
+  node* back;};
+struct header
+{ int count;
+  node* first;
+  node* rear;};
+class DLL
+{ node *plist,*pnew,*pred,*temp,*ploc;
+  header *head;
+  public:
+  DLL()
+  { head=new header;
+    head->count=0;
+    head->first=NULL;
+    head->rear=NULL;
+    temp=new node;
+    plist=new node;}
+  void insertn()
+  { pnew=new node;
+    if(pnew==NULL)
+    { cout<<"\nMemory full"; }
+    else if(head->count==0)
+    { cout<<"\nEnter the data of the element: ";
+      cin>>pnew->data;
+      head->first=pnew;
+      head->rear=pnew;
+      pnew->fore=NULL;
+      pnew->back=NULL;
+      temp=pnew;
+      head->count++;}
+    else
+    { cout<<"\nEnter the data of the element: ";
+      cin>>pnew->data;
+      head->rear=pnew;
+      pnew->back=temp;
+      temp->fore=pnew;
+      pnew->fore=NULL;
+      head->count++;}}
+  void deleten()
+  { int i,x,f;
+    cout<<"\nEnter the data of the element to be deleted: ";
+    cin>>x;
+    temp=head->first;
+    for(i=0;i<head->count;i++)
+    { if(temp->data==x)
+      { f++;
+        break;}
+      temp=temp->fore;}
+    if(f!=0)
+    { if(i==0)
+      { ploc=new node;
+        ploc=temp->fore;
+        delete temp;
+        ploc->back=NULL;
+        head->first=ploc;
+        head->count--;}
+      else if(i==head->count)
+      { ploc=new node;
+        ploc=temp->back;
+        delete temp;
+        ploc->fore=NULL;
+        head->count--;
+        head->rear=ploc;}
+      else
+      { pred=new node;
+        ploc=new node;
+        ploc=temp->fore;
+        pred=temp->back;
+        delete temp;
+        pred->fore=ploc;
+        ploc->back=pred;
+        head->count--;}}
+    else
+    { cout<<"\nElement is not present within the list";}}
+  void display()
+  { temp=head->first;
+    cout<<"\nList: ";
+    while(temp->fore!=NULL)
+    { cout<<temp->data<<"->";
+      temp=temp->fore;}
+    cout<<temp->data;}};
+int main()
+{ DLL dl;
+  int c,o;
+  label:
+  cout<<"\n1.Insert 2.Delete 3.Display\nEnter your choice: ";
+  cin>>o;
+  switch(o)
+  { case 1: dl.insertn();
+            break;
+    case 2: dl.deleten();
+            break;
+    case 3: dl.display();
+            break;}
+  cout<<"\nEnter 1 to continue and 0 to exit: ";
+  cin>>c;
+  if(c!=0)
+  { goto label;}
+  return 0;}

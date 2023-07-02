@@ -1,0 +1,99 @@
+#include<iostream>
+using namespace std;
+struct node
+{ int data;
+  node *link;};
+struct header
+{ int count;
+  node *first,*rear;};
+class queuesll
+{ public:
+  node *temp,*pred,*ploc;
+  header *head;
+  queuesll()
+  { head=new header;
+    head->count=0;
+    head->first=NULL;
+    head->rear=NULL;}
+  void insert()
+  { temp=new node;
+    if(temp==NULL)
+    { cout<<"\nMemory full";}
+    else if(head->count==0)
+    { cout<<"\nEnter data: ";
+      cin>>temp->data;
+      head->first=temp;
+      temp->link=NULL;
+      head->count++;
+      head->rear=temp;}
+    else
+    { cout<<"\nEnter data: ";
+      cin>>temp->data;
+      if(temp->data>head->rear->data)
+      { head->rear->link=temp;
+        head->rear=temp;
+        temp->link=NULL;
+        head->count++;}
+      else if(temp->data<head->first->data)
+      { temp->link=head->first;
+        head->first=temp;
+        head->count++;}
+      else
+      { ploc=new node;
+        pred=new node;
+        ploc=head->first;
+        while(ploc!=NULL)
+        { if(ploc->data>temp->data)
+          {break;}
+          pred=ploc;
+          ploc=ploc->link;}
+        temp->link=ploc;
+        pred->link=temp;}}}
+  void deleten()
+  { int d,c=1;
+    cout<<"Enter the data of the element to be deleted: ";
+    cin>>d;
+    temp=new node;
+    ploc=new node;
+    ploc=head->first;
+    while(ploc!=NULL)
+    { if(ploc->data==d)
+      { break;}
+      temp=ploc;
+      ploc=ploc->link;}
+    if(d==1)
+    { head->first=ploc->link;
+      delete ploc;
+      head->count--;}
+    else if(d==head->count)
+    { head->rear=temp;
+      delete ploc;
+      head->count--;}
+    else
+    { temp->link=ploc->link;
+      delete ploc;
+      head->count--;}}
+  void display()
+  { temp=new node;
+    temp=head->first;
+    cout<<"\nQueue: ";
+    while(temp!=NULL)
+    { cout<<temp->data<<"->";
+      temp=temp->link;}}};
+int main()
+{ queuesll q;
+  int c,l;
+  do
+  {cout<<"1.Insert\n2.Display\n3.Delete\nEnter your choice: ";
+   cin>>c;
+   switch(c)
+   { case 1: q.insert();
+             break;
+     case 2: q.display();
+             break;
+     case 3: q.deleten();
+             break;}
+   cout<<"\nEnter 0 to exit/else any other number to continue: ";
+   cin>>l;}
+  while(l!=0);
+  return 0;}
