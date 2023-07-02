@@ -1,22 +1,27 @@
 #include<iostream>
 #include<stdlib.h>
 using namespace std;
+
 struct node
 { int data;
   node* link;};
+
 struct header
 { int count;
   node* front;
   node* rear;};
+
 class SLL
 { header *queue;
   node *pred,*pnew,*temp2,*temp;
   public:
+  
   SLL()
   { queue=new header;
     queue->count=0;
     queue->front=NULL;
     queue->rear=NULL;}
+  
   void enqueue()
   { pnew = new node;
     if(queue->count==0)
@@ -39,6 +44,7 @@ class SLL
       pnew->link=NULL;}
     else if(pnew==NULL)
     { cout<<"\nNot possible, Memory full";}}
+  
   void display()
   { temp=queue->front;
     if(queue->count==0)
@@ -68,6 +74,7 @@ class SLL
       else
       { cout<<"\nQueue SLL: ";
         cout<<temp->data;}}}}
+  
   void dequeue()
   { if(queue->count==0)
     { cout<<"\nList is empty";}
@@ -98,6 +105,7 @@ class SLL
       queue->count--;
       temp->link=NULL;
       queue->rear=temp;}}
+  
   void destroy()
   { if(queue->count==0)
     { cout<<"\nList is empty";}
@@ -112,59 +120,65 @@ class SLL
        queue->count--;}
      delete temp;
      cout<<"\nList destroyed";}}
-void empty()
-{ if(queue->front==NULL)
-  { cout<<"\nList is empty";}
-  else
-  { cout<<"\nList is not empty";}}
-void traversal()
-{ if(queue->count==0)
-  { cout<<"\nList is empty";}
-  else{
-   int k,j=1;
-   temp=new node;
-   pred=new node;
-   cout<<"\nEnter data of the element to be searched: ";
-   cin>>k;
-   temp=queue->front;
-   pred->link=queue->front;
-   while(temp->link!=NULL)
-   { if(temp->data==k)
-     { cout<<"\nElement is found in the list at "<<pred->link<<"and position "<<j;}
-     pred=temp;
-     temp=temp->link;
-     j++;}
-     if(temp->link==NULL)
-     { if(temp->data==k)
-       { cout<<"\nSearch element is found in the list at "<<pred->link<<" and position "<<j;}}}}
-void isfull()
-{ pnew=new node;
-  if(pnew==NULL)
-  {cout<<"\nList if full";}
-  else
-  {cout<<"\nList is not full";}}
-void retrieve()
-{ if(queue->count==0)
-  { cout<<"\nList is empty";}
-  else{
-   int kq;
-   cout<<"\nEnter the target position to be retrieved(starts from 0): ";
-   cin>>kq;
-   if(kq>queue->count)
-   {cout<<"\noverflow";}
-   else
-   { kq=kq-1;
+  
+  void empty()
+  { if(queue->front==NULL)
+    { cout<<"\nList is empty";}
+    else
+    { cout<<"\nList is not empty";}}
+  
+  void traversal()
+  { if(queue->count==0)
+    { cout<<"\nList is empty";}
+    else{
+     int k,j=1;
      temp=new node;
      pred=new node;
+     cout<<"\nEnter data of the element to be searched: ";
+     cin>>k;
      temp=queue->front;
      pred->link=queue->front;
-     while(kq>=0)
-     { pred=temp;
+     while(temp->link!=NULL)
+     { if(temp->data==k)
+       { cout<<"\nElement is found in the list at "<<pred->link<<"and position "<<j;}
+       pred=temp;
        temp=temp->link;
-       kq--;}
-     cout<<"\nElement at target position is "<<temp->data<<" and address "<<pred->link;}}}
-void stackcount()
-{ cout<<"\nStack count= "<<queue->count;}};
+       j++;}
+       if(temp->link==NULL)
+       { if(temp->data==k)
+         { cout<<"\nSearch element is found in the list at "<<pred->link<<" and position "<<j;}}}}
+  
+  void isfull()
+  { pnew=new node;
+    if(pnew==NULL)
+    {cout<<"\nList if full";}
+    else
+    {cout<<"\nList is not full";}}
+
+  void retrieve()
+  { if(queue->count==0)
+    { cout<<"\nList is empty";}
+    else{
+     int kq;
+     cout<<"\nEnter the target position to be retrieved(starts from 0): ";
+     cin>>kq;
+     if(kq>queue->count)
+     {cout<<"\noverflow";}
+     else
+     { kq=kq-1;
+       temp=new node;
+       pred=new node;
+       temp=queue->front;
+       pred->link=queue->front;
+       while(kq>=0)
+       { pred=temp;
+         temp=temp->link;
+         kq--;}
+       cout<<"\nElement at target position is "<<temp->data<<" and address "<<pred->link;}}}
+
+  void stackcount()
+  { cout<<"\nStack count= "<<queue->count;}};
+
 int main()
 { SLL s;
   int n,c;
