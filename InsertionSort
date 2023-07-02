@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+
+class Insertsort
+{ int i,j,c,n;
+  int a[10];
+  
+  Insertsort()
+  {cout<<"\nHow many elements: ";
+   cin>>n;
+   for(i=0;i<n;i++)
+   { cout<<"\nEnter: ";
+     cin>>a[i];}}
+  
+  void sorti()
+  { for(i=1;i<n;i++)
+    {c=a[i];
+     for(j=i-1;j>=0;j--)
+     { if(c<a[j])
+       {a[j+1]=a[j];
+        a[j]=c;}))
+  
+  void disp()
+  {cout<<"\nResult: ";
+   for(i=0;i<n;i++)
+   { cout<<a[i]<<"\t";}}};
+
+int main()
+{ Insertsort ib;
+  ib.sorti();
+  ib.disp();}
