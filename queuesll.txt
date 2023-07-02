@@ -1,21 +1,26 @@
 #include<iostream>
 using namespace std;
+
 struct node
 { int data;
   node* link;};
+
 struct header
 { int count;
   node* front;
   node* rear;};
+
 class queueSLL
 { header *queue;
   node *pred,*pnew,*temp2,*ploc,*temp;
   public:
+  
   queueSLL()
   { queue=new header;
     queue->count=0;
     queue->front=NULL;
     queue->rear=NULL;}
+  
   void enqueue()
   { temp=new node;
     if(temp==NULL)
@@ -50,6 +55,7 @@ class queueSLL
           ploc=ploc->link;}
         temp->link=ploc;
         pred->link=temp;}}}
+  
   void display()
   { temp=queue->front;
     if(queue->count==0)
@@ -65,6 +71,7 @@ class queueSLL
       else
       { cout<<"\nQueue SLL: ";
         cout<<temp->data;}}}
+  
   void dequeue()
   { temp=queue->front;
     if(queue->count==0)
@@ -82,29 +89,35 @@ class queueSLL
        if(queue->count==1)
        { queue->rear=queue->front;}
        cout<<"\nElement deleted";}}
-void empty()
-{ if(queue->front==NULL)
-  { cout<<"\Queue is empty";}
-  else
-  { cout<<"\nQueue is not empty";}}
-void isfull()
-{ pnew=new node;
-  if(pnew==NULL)
-  {cout<<"\nQueue if full";}
-  else
-  {cout<<"\nQueue is not full";}}
-void queuecount()
-{ cout<<"\nqueue count= "<<queue->count;}
-void queuefront()
-{ if(queue->count==0)
-  { cout<<"\nEmpty queue";}
-  else
-  { cout<<"\nQueue front= "<<queue->front->data;}}
-void queuerear()
-{ if(queue->count==0)
-  { cout<<"\nEmpty queue";}
-  else
-  { cout<<"\nQueue rear: "<<queue->rear->data;}}};
+  
+  void empty()
+  { if(queue->front==NULL)
+    { cout<<"\Queue is empty";}
+    else
+    { cout<<"\nQueue is not empty";}}
+  
+  void isfull()
+  { pnew=new node;
+    if(pnew==NULL)
+    {cout<<"\nQueue if full";}
+    else
+    {cout<<"\nQueue is not full";}}
+
+  void queuecount()
+  { cout<<"\nqueue count= "<<queue->count;}
+
+  void queuefront()
+  { if(queue->count==0)
+    { cout<<"\nEmpty queue";}
+    else
+    { cout<<"\nQueue front= "<<queue->front->data;}}
+
+  void queuerear()
+  { if(queue->count==0)
+    { cout<<"\nEmpty queue";}
+    else
+    { cout<<"\nQueue rear: "<<queue->rear->data;}}};
+
 int main()
 { queueSLL s;
   int n,c;
