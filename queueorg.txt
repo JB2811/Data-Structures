@@ -1,20 +1,25 @@
 #include<iostream>
 using namespace std;
+
 struct node
 { int data;
   node *link;};
+
 struct header
 { int count;
   node *first,*rear;};
+
 class queuesll
 { public:
   node *temp,*pred,*ploc;
   header *head;
+  
   queuesll()
   { head=new header;
     head->count=0;
     head->first=NULL;
     head->rear=NULL;}
+  
   void insert()
   { temp=new node;
     if(temp==NULL)
@@ -49,6 +54,7 @@ class queuesll
           ploc=ploc->link;}
         temp->link=ploc;
         pred->link=temp;}}}
+  
   void deleten()
   { int d,c=1;
     cout<<"Enter the data of the element to be deleted: ";
@@ -73,6 +79,7 @@ class queuesll
     { temp->link=ploc->link;
       delete ploc;
       head->count--;}}
+  
   void display()
   { temp=new node;
     temp=head->first;
@@ -80,6 +87,7 @@ class queuesll
     while(temp!=NULL)
     { cout<<temp->data<<"->";
       temp=temp->link;}}};
+
 int main()
 { queuesll q;
   int c,l;
