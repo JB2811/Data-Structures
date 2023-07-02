@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+
+class evap
+{ public:
+  string pf,inf,temp;
+  string stack[10];
+  int top,len;
+  
+  evap()
+  { cout<<"Enter postfix expression: ";
+    cin>>pf;
+    top=-1;
+    len=pf.length();
+    cout<<"\n"<<len<<"\n";}
+  
+  void conv()
+  {int i=0;
+   top++;
+   for(i=0;i<len;i++)
+   { if(pf[i]=='+'||pf[i]=='*'||pf[i]=='-'||pf[i]=='/')
+     { temp='\0';
+       cout<<"\ntemp="<<temp<<endl;
+       top--;
+       temp=stack[top];
+       top--;
+       temp=pf[i]+temp;
+       temp=stack[top]+temp;
+       cout<<"\ntemp= "<<temp<<endl;
+       stack[top]=temp;
+       top++;}
+     else
+     { stack[top]=pf[i];
+       cout<<"\ninfix= "<<stack[top-1];
+       top++;}}}
+  
+  void disp()
+  { cout<<"\ninfix= "<<stack[top-1];}};
+
+int main()
+{ evap e;
+  e.conv();
+  e.disp();
+  return 0;}
