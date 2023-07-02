@@ -1,17 +1,21 @@
 #include<iostream>
 using namespace std;
+
 struct node
 { int data;
   node* fore;
   node* back;};
+
 struct header
 { int count;
   node* first;
   node* rear;};
+
 class DLL
 { node *plist,*pnew,*pred,*temp,*ploc;
   header *head;
   public:
+  
   DLL()
   { head=new header;
     head->count=0;
@@ -19,6 +23,7 @@ class DLL
     head->rear=NULL;
     temp=new node;
     plist=new node;}
+  
   void insertn()
   { pnew=new node;
     if(pnew==NULL)
@@ -40,6 +45,7 @@ class DLL
       temp->fore=pnew;
       pnew->fore=NULL;
       head->count++;}}
+  
   void deleten()
   { int i,x,f;
     cout<<"\nEnter the data of the element to be deleted: ";
@@ -76,6 +82,7 @@ class DLL
         head->count--;}}
     else
     { cout<<"\nElement is not present within the list";}}
+  
   void display()
   { temp=head->first;
     cout<<"\nList: ";
@@ -83,6 +90,7 @@ class DLL
     { cout<<temp->data<<"->";
       temp=temp->fore;}
     cout<<temp->data;}};
+
 int main()
 { DLL dl;
   int c,o;
