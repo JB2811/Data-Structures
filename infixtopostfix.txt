@@ -1,16 +1,19 @@
 #include<iostream>
 using namespace std;
+
 class intopo
 { public:
   string infix;
   char stack[100];
   int top,len,i,l;
+  
   intopo()
   { cout<<"\nEnter the infix expression: ";
     cin>>infix;
     len=infix.length();
     top=-1;
     l=0;}
+  
   void conv()
   { top++;
     cout<<"\nPostfix: ";
@@ -59,6 +62,7 @@ class intopo
     while(top>=0)
     { cout<<stack[top];
       top--;}}};
+
 int main()
 { intopo po;
   po.conv();
