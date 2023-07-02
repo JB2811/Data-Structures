@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 class graph
 {public:
   int s[10],q[10],adj[10][10],ins[10],inq[10],n,i,j;
@@ -22,6 +23,7 @@ class graph
       inq[i]=0;
       ins[i]=0;
       v[i]=0;}}
+  
   void BFT()
   { int k=0;
     cout<<"\nBFT: ";
@@ -39,6 +41,7 @@ class graph
           j++;}}
     for(i=0;i<k;i++)
     {cout<<q[i]<<"-";}}
+  
   void DFT()
   { int top=-1;
     cout<<"\nDFT: ";
@@ -66,6 +69,7 @@ class graph
                top++;}
              j++;}
             top--;}}}};
+
 int main()
 { graph g;
   g.BFT();
