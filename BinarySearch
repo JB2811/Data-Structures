@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+
+class bin
+{ public:
+  int a[10];
+  int f,t,j,n,high,mid,low,s,i;
+  
+  bin()
+  { f=0;
+    cout<<"\nHow many elementS: ";
+    cin>>n;
+    for(i=0;i<n;i++)
+    { cout<<"\nEnter: ";
+      cin>>a[i];}
+    low=0;
+    high=n;
+    cout<<"\nEnter search element: ";
+    cin>>s;
+    for(i=0;i<(n-1);i++)
+    {for(j=i+1;j<n;j++)
+     { if(a[i]>a[j])
+       { t=a[i];
+         a[i]=a[j];
+         a[j]=t;}}}
+    cout<<"\nArray after sorting: ";
+    for(i=0;i<n;i++)
+    { cout<<" "<<a[i];}}
+  
+  int search()
+  { mid=(high+low)/2;
+    if(a[mid]==s)
+    { cout<<"\nSearch element found at "<<mid;
+      f++;
+      return 0;}
+    else if(a[mid]>s)
+    { high=(mid);}
+    else
+    { low=(mid);}
+    if(f==0)
+    { search();}}};
+
+int main()
+{ bin o;
+  o.search();
+  if(o.f==0)
+  { cout<<"\nsearch element is not present within the array";}
+  return 0;}
